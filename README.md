@@ -4,13 +4,38 @@ Uncertainty-aware peptide design. See `GLOSSARY.md` for terms and `docs/adr/` fo
 
 ## Setup
 
-Python 3.12 via `uv`. PyTorch needs the CUDA 12.8 build:
+Python 3.12 via `uv`. From the repo root:
 
-    uv venv --python 3.12
+    uv sync
+
+`pyproject.toml` is the dependency list. `uv.lock` pins the resolve. Torch is taken from the CUDA 12.8 index declared in `pyproject.toml` (`https://download.pytorch.org/whl/cu128`). If that index cannot be selected, install torch first and then sync the rest:
+
     uv pip install torch --index-url https://download.pytorch.org/whl/cu128
-    uv pip install numpy pandas scikit-learn scipy gpytorch biopython modlamp streamlit plotly transformers accelerate bitsandbytes pytest
+    uv sync
 
-`requirements.lock` records the exact versions installed.
+`requirements.lock` is the earlier pip freeze, kept so the CUDA build that was installed on this machine stays recorded.
+
+## Commands
+
+From the repo root, with `data/Hex1279.fasta` and `data/Hex142.fasta` present for the two reports:
+
+    uv run pytest
+    uv run streamlit run src/peep_tide/app.py
+    uv run python -m peep_tide.calibration
+    uv run python -m peep_tide.validity
+
+`pytest` uses a fixture and a fake language model. The real-model smoke test is marked `slow` and stays out of that default run.
+
+## Commands
+
+From the repo root, with `data/Hex1279.fasta` and `data/Hex142.fasta` present for the two reports:
+
+    uv run pytest
+    uv run streamlit run src/peep_tide/app.py
+    uv run python -m peep_tide.calibration
+    uv run python -m peep_tide.validity
+
+`pytest` uses a fixture and a fake language model. The real-model smoke test is marked `slow` and stays out of that default run.
 
 ## Data (not in git)
 
