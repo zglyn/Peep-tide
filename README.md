@@ -26,17 +26,6 @@ From the repo root, with `data/Hex1279.fasta` and `data/Hex142.fasta` present fo
 
 `pytest` uses a fixture and a fake language model. The real-model smoke test is marked `slow` and stays out of that default run.
 
-## Commands
-
-From the repo root, with `data/Hex1279.fasta` and `data/Hex142.fasta` present for the two reports:
-
-    uv run pytest
-    uv run streamlit run src/peep_tide/app.py
-    uv run python -m peep_tide.calibration
-    uv run python -m peep_tide.validity
-
-`pytest` uses a fixture and a fake language model. The real-model smoke test is marked `slow` and stays out of that default run.
-
 ## Data (not in git)
 
 `data/Hex1279.fasta` (train) and `data/Hex142.fasta` (test) come from the
